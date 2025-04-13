@@ -6,7 +6,7 @@ import java.util.Map;
 public class AccountService {
     private Map<Integer, Account> accountsMap = new HashMap<>();
 
-    public Account createAccount(Integer accountNumber, String CardHolderName, Double balance) {
+    public Account createAccount(int accountNumber, String CardHolderName, double balance) {
         if (accountsMap.containsKey(accountNumber)) {
             throw new IllegalArgumentException("AccountNumber is an unique identified account number!!!!");
         }
@@ -15,7 +15,7 @@ public class AccountService {
         return account;
     }
 
-    public void removeAccount(Integer accountNumber) {
+    public void removeAccount(int accountNumber) {
         Account account = accountsMap.get(accountNumber);
         if (account == null) {
             throw new AccountNotFoundException("The CardBank of the specified Cardholder is expired!");
@@ -24,7 +24,7 @@ public class AccountService {
         }
     }
 
-    public Account getAccountsRecord(Integer accountNumber, String CardHolderName, Double balance) {
+    public Account getAccountsRecord(int accountNumber, String CardHolderName, double balance) {
         Account account = accountsMap.get(accountNumber);
 
         if (account == null) {
@@ -34,7 +34,7 @@ public class AccountService {
 
     }
 
-    public Account deposit(Double balance, Integer accountNumber) {
+    public Account deposit(double balance, int accountNumber) {
         Account account1 = accountsMap.get(accountNumber);
         Account account2 = accountsMap.get(balance);
         double depositedValue = 0;
@@ -45,7 +45,7 @@ public class AccountService {
             if (account2 == null) {
                 throw new NullPointerException("The balance of an account can not be null!");
             } else {
-                double newBalance = account2.getBalance() + depositedValue;
+                Double newBalance = account2.getBalance() + depositedValue;
                 account2.setBalance(newBalance);
             }
         }
@@ -53,7 +53,7 @@ public class AccountService {
     }
 
 
-    public Account withdrawAmount(Double balance, Integer accountNumber, Double valueAmount) {
+    public Account withdrawAmount(double balance, int accountNumber, double valueAmount) {
         Account acc = accountsMap.get(accountNumber);
         Account account = accountsMap.get(balance);
         if (acc == null) {
@@ -66,7 +66,7 @@ public class AccountService {
                     throw new IllegalArgumentException("The desiredValue can not be withdrawn because you don't accomplish conditions!!");
                 } else {
                     //  double withdrawAmount = valueAmount;
-                    double newBalance = account.getBalance() - valueAmount;
+                    Double newBalance = account.getBalance() - valueAmount;
                     account.setBalance(newBalance);
                 }
             }
@@ -74,8 +74,8 @@ public class AccountService {
         return account;
     }
 
-    public void moneyTransfer(Integer fromAccountNumber, Integer toAccountNumber, Double balance1,
-                              Double balance2, Double moneyTransfer) {
+    public void moneyTransfer(int fromAccountNumber, int toAccountNumber, double balance1,
+                              double balance2, double moneyTransfer) {
         Account acc1 = accountsMap.get(fromAccountNumber);
         Account acc2 = accountsMap.get(toAccountNumber);
         Account acc11 = accountsMap.get(balance1);

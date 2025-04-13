@@ -22,7 +22,7 @@ public class StudentService {
         return students;
     }
 
-    public Student getStudentById(Integer StudentId) {
+    public Student getStudentById(int StudentId) {
         return students.stream().filter((student) -> student.getId().equals(StudentId)).findFirst().orElseThrow(() -> new StudentNotFoundException("The StudentId does not exist!!!"));
     }
 
